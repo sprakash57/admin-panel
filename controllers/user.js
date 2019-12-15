@@ -1,10 +1,14 @@
-const User = require('../model/User');
 const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const User = require('../model/User');
+const validateRegistration = require('../validation/register');
+const validateLogin = require('../validation/login');
 const key = process.env.SECRET_JWT_KEY;
 
 exports.register = (req, res) => {
+    const { errors, isValid } = validateRegistration(req.body);
+    if (!isValid) return res.status(400).json({ errors });
     User.findOne({ email: req.body.email })
         .then(user => {
             if (user) return res.status(400).json({ msg: 'User already exists!' })
@@ -33,9 +37,14 @@ exports.register = (req, res) => {
 
 exports.login = (req, res) => {
     const { email, password } = req.body;
+    const { errors, isValid } = validateLogin(req.body);
+    if (!isValid) return res.status(400).json({ errors });
     User.findOne({ email })
         .then(user => {
-            if (!user) return res.status(404).json({ msg: 'User not found!' });
+            if (!user) {
+                errors.email = 'User not found';
+                return res.status(404).json(errors)
+            }
             bcrypt.compare(password, user.password)
                 .then(isMatch => {
                     //User matched. singed the token
@@ -47,7 +56,10 @@ exports.login = (req, res) => {
                             else throw { msg: 'Token missing' }
                         })
                     }
-                    else return res.status(400).json({ msg: 'Password incorrect' })
+                    else {
+                        errors.password = 'Incorrect password';
+                        return res.status(400).json(errors);
+                    }
                 })
                 .catch(err => res.json(err))
         })
