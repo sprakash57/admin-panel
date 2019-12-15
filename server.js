@@ -3,6 +3,8 @@ const app = require('express')();
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
+const passport = require('passport');
+
 const user = require('./routes/user');
 const profile = require('./routes/profile');
 const post = require('./routes/post');
@@ -18,7 +20,10 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => res.send('Welcome'));
+//Passport middleware and config
+app.use(passport.initialize());
+require('./config/passport')(passport);
+
 //Routes
 app.use('/user', user);
 app.use('/profile', profile);
