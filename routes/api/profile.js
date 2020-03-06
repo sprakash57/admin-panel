@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const passport = require('passport');
-const profileController = require('../controllers/profile');
+const profileController = require('../../controllers/profile');
 
 /**
  * @route GET user/test
