@@ -1,7 +1,7 @@
 require('dotenv').config()
-const app = require('express')();
+const express = require('express');
+const app = express();
 const connectDB = require('./config/db');
-const bodyParser = require('body-parser');
 const logger = require('morgan');
 // const mongoose = require('mongoose');
 // const passport = require('passport');
@@ -14,10 +14,8 @@ const port = process.env.PORT || 5000;
 
 //Connect database
 connectDB();
-app.get('/', (req, res) => res.send('API running'));
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json({ extended: false }));
 
 // //Passport middleware and config
 // app.use(passport.initialize());

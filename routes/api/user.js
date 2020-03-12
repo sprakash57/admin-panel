@@ -1,18 +1,12 @@
 const router = require('express').Router();
-
+const userController = require('../../controllers/user');
+const { signupValidation } = require('../../validation');
 /**
- * @route GET user/test
- * @desc test user routes
+ * @route POST api/users
+ * @desc register new user
  * @access Public
  */
-router.get('/test', (req, res) => res.json({ msg: 'user works' }))
-
-// /**
-//  * @route POST user/register
-//  * @desc register new user
-//  * @access Public
-//  */
-// router.post('/register', userController.register)
+router.post('/register', signupValidation, userController.register)
 
 // /**
 //  * @route POST user/login
