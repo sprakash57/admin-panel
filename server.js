@@ -6,7 +6,7 @@ const logger = require('morgan');
 // const mongoose = require('mongoose');
 // const passport = require('passport');
 const user = require('./routes/api/user');
-// const auth = require('./routes/api/auth');
+const auth = require('./routes/api/auth');
 const profile = require('./routes/api/profile');
 const post = require('./routes/api/post');
 
@@ -23,7 +23,7 @@ app.use(express.json({ extended: false }));
 
 // //Routes
 app.use('/api/user', user);
-// app.use('/api/auth', auth);
+app.use('/api/auth', auth);
 app.use('/api/profile', profile);
 app.use('/api/post', post);
 

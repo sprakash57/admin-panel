@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const userController = require('../../controllers/user');
-const { signupValidation } = require('../../validation');
+const { signupValidation } = require('../../utils/index');
 /**
  * @route POST api/users
  * @desc register new user
