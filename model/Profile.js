@@ -3,12 +3,7 @@ const mongoose = require('mongoose');
 const ProfileSchema = mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'user'
-    },
-    hanlde: {
-        type: String,
-        required: true,
-        max: 40
+        ref: 'User'
     },
     company: String,
     website: String,
@@ -77,12 +72,8 @@ const ProfileSchema = mongoose.Schema({
         twitter: String,
         facebook: String,
         linkedin: String,
-        instagram: String
-    },
-    date: {
-        type: Date,
-        default: Date.now
+        stackoverflow: String
     }
-});
+}, { timestamps: true });
 
 module.exports = Profile = mongoose.model('Profile', ProfileSchema);

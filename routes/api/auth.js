@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const auth = require('../../middleware/auth');
 const { getAuthUser, login } = require('../../controllers/auth');
-const { loginValidation } = require('../../utils/index');
+const { loginValidation } = require('../../middleware/validation');
 
 /**
  * @param - api/auth

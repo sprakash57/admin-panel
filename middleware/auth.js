@@ -3,7 +3,7 @@ const config = require('config');
 const { setErrorMsg } = require('../utils/index');
 
 module.exports = (req, res, next) => {
-    //set token in header
+    //get token from header
     const token = req.header('x-auth-token');
     if (!token) return res.status(401).json(setErrorMsg('No Token, Acees denied'));
     //Otherwise verify token
