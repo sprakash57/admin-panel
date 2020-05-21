@@ -9,13 +9,6 @@ const { signupValidation } = require('../../middleware/validation');
 router.post('/register', signupValidation, userController.register)
 
 // /**
-//  * @route POST user/login
-//  * @desc login user and return token
-//  * @access Public
-//  */
-// router.post('/login', userController.login)
-
-// /**
 //  * @route GET user/current
 //  * @desc return user whoever token belongs to
 //  * @access Private

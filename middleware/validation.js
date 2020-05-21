@@ -28,3 +28,11 @@ exports.educateValidation = [
     check('fieldofstudy', 'Field of study is required').notEmpty(),
     check('from', 'From is required').notEmpty()
 ]
+
+exports.postValidation = [
+    check('text', 'Text body is required').notEmpty()
+]
+
+exports.commentValidation = [
+    check('text', 'Text body is required').notEmpty()
+]

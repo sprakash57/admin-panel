@@ -4,16 +4,44 @@ const { getAuthUser, login } = require('../../controllers/auth');
 const { loginValidation } = require('../../middleware/validation');
 
 /**
- * @param - api/auth
- * @desc - get authenticated user based on id.
- * @access - Public
+ * @swagger
+ * /api/auth:
+ *   get:
+ *     tags:
+ *       - auth
+ *     summary: Get current authenticated user
+ *     description: Get current authenticated user
+ *     produces:
+ *       - application/json
+ *     parameters: []
+ *     responses:
+ *       200:
+ *         description: Authenticated user
  */
 router.get('/', auth, getAuthUser);
 
 /**
- * @param - api/auth
- * @desc - Authenticate user and get the token
- * @access - Public
+ * @swagger
+ * /api/auth:
+ *   post:
+ *     tags:
+ *       - login
+ *     summary: Login
+ *     description: Let authenticated user login to the portal
+ *     consumes:
+ *       - application/json
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - in: "body"
+ *         name: "body"
+ *         description: "logged in user"
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: Authenticated user
+ *       401:
+ *         description: Invalid credentials
  */
 router.post('/', loginValidation, login)
 
