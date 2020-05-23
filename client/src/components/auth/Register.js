@@ -1,7 +1,12 @@
 import React from 'react';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { setAlert } from '../../actions/alert';
+import { register } from '../../actions/auth';
 import { useFormFields } from '../../libs/hooksLib';
 
-const Register = () => {
+const Register = ({ setAlert, register, isAuthenticated }) => {
     const [fields, handleInputChange] = useFormFields({
         name: '',
         email: '',
@@ -9,13 +14,19 @@ const Register = () => {
         password2: ''
     })
 
+    const { name, email, password, password2 } = fields;
+
     const handleSubmit = e => {
         e.preventDefault();
-        if (fields.password !== fields.password2) {
-            console.log("Password does not match")
+        if (password !== password2) {
+            setAlert('Password does not match', 'danger');
         } else {
-            console.log(fields);
+            register({ name, email, password });
         }
+    }
+
+    if (isAuthenticated) {
+        return <Redirect to='/dashboard' />
     }
 
     return (
@@ -28,8 +39,7 @@ const Register = () => {
                         type="text"
                         placeholder="Name"
                         name="name"
-                        required
-                        value={fields.name}
+                        value={name}
                         onChange={handleInputChange}
                     />
                 </div>
@@ -38,8 +48,7 @@ const Register = () => {
                         type="email"
                         placeholder="Email Address"
                         name="email"
-                        required
-                        value={fields.email}
+                        value={email}
                         onChange={handleInputChange}
                     />
                     <small className="form-text">Use Gravatar email if you want user icon</small>
@@ -50,8 +59,7 @@ const Register = () => {
                         placeholder="Password"
                         name="password"
                         minLength="6"
-                        required
-                        value={fields.password}
+                        value={password}
                         onChange={handleInputChange}
                     />
                 </div>
@@ -61,18 +69,26 @@ const Register = () => {
                         placeholder="Confirm Password"
                         name="password2"
                         minLength="6"
-                        required
-                        value={fields.password2}
+                        value={password2}
                         onChange={handleInputChange}
                     />
                 </div>
                 <input type="submit" className="btn btn-primary" value="Register" />
             </form>
             <p className="my-1">
-                Already have an account? <a href="login.html">Sign In</a>
+                Already have an account? <Link to="/login">Sign In</Link>
             </p>
         </>
     )
+};
+
+Register.propTypes = {
+    setAlert: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool,
 }
 
-export default Register;
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated
+})
+
+export default connect(mapStateToProps, { setAlert, register })(Register);

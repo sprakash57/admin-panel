@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const swaggerUi = require("swagger-ui-express");
 const connectDB = require('./config/db');
 const logger = require('morgan');
@@ -14,6 +15,7 @@ const port = process.env.PORT || 5000;
 
 //Database
 connectDB();
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json({ extended: false }));
 
