@@ -5,6 +5,10 @@ const { validationResult } = require('express-validator');
 const User = require('../model/User');
 const { setErrorMsg } = require('../utils/index');
 
+exports.printLog = () => {
+    console.log('printing log ---->');
+}
+
 exports.getAuthUser = async (req, res) => {
     try {
         const user = await User.findById(req.user.id).select('-password');
@@ -15,6 +19,7 @@ exports.getAuthUser = async (req, res) => {
 }
 
 exports.login = async (req, res) => {
+    this.printLog();
     const errors = validationResult(req);
     if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
     const { email, password } = req.body;
