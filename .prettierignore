@@ -1,0 +1,8 @@
+**/node_modules
+**/dist
+**/package.json
+**/package-lock.json
+**/.eslintrc.cjs
+**/tsconfig.json
+**/jest.config.js
+public/index.html

@@ -1,42 +1,47 @@
 {
-  "name": "contrivocial",
-  "version": "1.0.0",
-  "description": "'A social platform for those who codes'",
-  "main": "server.js",
+  "name": "admin-panel",
+  "version": "0.0.2",
+  "type": "module",
   "scripts": {
-    "start": "nodemon server.js",
-    "server": "nodemon server.js",
-    "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "start": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives",
+    "lint-fix": "eslint . --ext ts,tsx --fix",
+    "preview": "vite preview",
+    "prepare": "husky install"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sprakash57/Contrivocial.git"
-  },
-  "author": "sunny prakash",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/sprakash57/Contrivocial/issues"
-  },
-  "homepage": "https://github.com/sprakash57/Contrivocial#readme",
   "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "config": "^3.3.1",
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "express-validator": "^6.6.1",
-    "gravatar": "^1.8.1",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.8.1",
-    "morgan": "^1.9.1",
-    "passport": "^0.4.1",
-    "passport-jwt": "^4.0.0",
-    "request": "^2.88.2",
-    "swagger-jsdoc": "^4.0.0",
-    "swagger-ui-express": "^4.1.4"
+    "@dnd-kit/core": "^6.0.8",
+    "@dnd-kit/sortable": "^7.0.2",
+    "@dnd-kit/utilities": "^3.2.1",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@floating-ui/react": "^0.25.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-modal": "^3.16.1",
+    "react-router-dom": "^6.14.2",
+    "recoil": "^0.7.7"
   },
   "devDependencies": {
-    "concurrently": "^5.2.0",
-    "dotenv": "^8.2.0"
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@types/react-modal": "^3.16.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "@vitejs/plugin-react": "^4.0.3",
+    "eslint": "^8.45.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.3",
+    "prettier": "3.0.0",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.5"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
   }
 }
